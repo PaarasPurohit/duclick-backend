@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
+
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "https://paaraspurohit.github.io")
 public class JwtApiController {
 
 	@Autowired
