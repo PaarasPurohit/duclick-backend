@@ -4,7 +4,7 @@ services:
     image: team-premium-backend-final
     build: .
     ports:
-      - "8099:8099"
+      - "8035:8035"
     volumes:
        - ./volumes:/volumes
     restart: unless-stopped
