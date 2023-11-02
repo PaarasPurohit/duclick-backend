@@ -1,7 +1,7 @@
 package com.nighthawk.spring_portfolio;
 
-import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -24,7 +24,8 @@ public class MvcConfig implements WebMvcConfigurer {
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("https://nighthawkcoders.github.io", "http://localhost:4000");
+        registry.addMapping("/**").allowedOrigins("https://nighthawkcoders.github.io", "http://127.0.0.1:4100/team-premium-frontend/");
+        registry.addMapping("/planet_weights/**").allowedOrigins("http://127.0.0.1:4100/").allowedMethods("GET");
     }
     
 }
