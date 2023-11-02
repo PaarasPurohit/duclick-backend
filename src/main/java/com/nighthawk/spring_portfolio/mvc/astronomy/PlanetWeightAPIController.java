@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/planet_weights")
-@CrossOrigin(origins = "http://127.0.0.1:4100")
+@CrossOrigin(origins = "https://paaraspurohit.github.io")
 public class PlanetWeightAPIController {
 
     @GetMapping("/{mass}")
