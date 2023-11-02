@@ -24,7 +24,7 @@ public class CelestialDataService {
     }
 
     public CelestialData storeData(CelestialData celestialData) {
-        celestialData.setId(idCounter);
+        celestialData.getCell().setId(String.valueOf(idCounter)); // Set id as a string
         celestialDataList.add(celestialData);
         idCounter++;
         return celestialData;
@@ -34,18 +34,18 @@ public class CelestialDataService {
         return celestialDataList;
     }
 
-    public CelestialData getDataById(Long id) {
+    public CelestialData getDataById(String id) { // Change parameter and return type to String
         Optional<CelestialData> result = celestialDataList.stream()
-                .filter(data -> data.getId().equals(id))
+                .filter(data -> data.getCell().getId().equals(id))
                 .findFirst();
         return result.orElse(null);
     }
 
-    public CelestialData updateData(Long id, CelestialData updatedData) {
+    public CelestialData updateData(String id, CelestialData updatedData) { // Change parameter to String
         for (int i = 0; i < celestialDataList.size(); i++) {
             CelestialData data = celestialDataList.get(i);
-            if (data.getId().equals(id)) {
-                updatedData.setId(id);
+            if (data.getCell().getId().equals(id)) {
+                updatedData.getCell().setId(id); // Set id as a string
                 celestialDataList.set(i, updatedData);
                 return updatedData;
             }
@@ -53,10 +53,10 @@ public class CelestialDataService {
         return null;
     }
 
-    public boolean deleteData(Long id) {
+    public boolean deleteData(String id) { // Change parameter to String
         for (int i = 0; i < celestialDataList.size(); i++) {
             CelestialData data = celestialDataList.get(i);
-            if (data.getId().equals(id)) {
+            if (data.getCell().getId().equals(id)) {
                 celestialDataList.remove(i);
                 return true;
             }

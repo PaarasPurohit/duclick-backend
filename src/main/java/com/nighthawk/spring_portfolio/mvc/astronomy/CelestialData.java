@@ -1,160 +1,117 @@
 package com.nighthawk.spring_portfolio.mvc.astronomy;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-@Entity
+import java.util.List;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CelestialData {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String date;
-    private double distanceKm;
-    private double distanceAu;
-    private double altitudeDegrees;
-    private double azimuthDegrees;
-    private String constellationShort;
-    private String constellationName;
-    private String constellationId;
-    private double rightAscensionHours;
-    private String rightAscensionString;
-    private String declinationString;
-    private double declinationDegrees;
-    private double magnitude;
-    private String elongation;
+    @JsonProperty("data")
+    private CelestialDataInfo data;
 
-    public CelestialData() {
-        // default constructor
+    @Data
+    public static class CelestialDataInfo {
+        private Observer observer;
+        private Dates dates;
+        private Table table;
     }
 
-    public Long getId() {
-        return id;
+    @Data
+    public static class Observer {
+        private Location location;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Data
+    public static class Location {
+        private double longitude;
+        private double elevation;
+        private double latitude;
     }
 
-    public String getName() {
-        return name;
+    @Data
+    public static class Dates {
+        private String from;
+        private String to;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Data
+    public static class Table {
+        private List<Row> rows;
     }
 
-    public String getDate() {
-        return date;
+    @Data
+    public static class Row {
+        private List<Cell> cells;
+        private Entry entry;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    @Data
+    public static class Cell {
+        private String date;
+        private Distance distance;
+        private Position position;
+        private String name;
+        private ExtraInfo extraInfo;
+        private String id; // Use String for id
     }
 
-    public double getDistanceKm() {
-        return distanceKm;
+    @Data
+    public static class Distance {
+        @JsonProperty("fromEarth")
+        private FromEarth fromEarth;
     }
 
-    public void setDistanceKm(double distanceKm) {
-        this.distanceKm = distanceKm;
+    @Data
+    public static class FromEarth {
+        private String km;
+        private String au;
     }
 
-    public double getDistanceAu() {
-        return distanceAu;
+    @Data
+    public static class Position {
+        private Horizontal horizontalPosition;
+        private Azimuth azimuth;
+        private Constellation constellation;
+        private Equatorial equatorial;
     }
 
-    public void setDistanceAu(double distanceAu) {
-        this.distanceAu = distanceAu;
+    @Data
+    public static class Horizontal {
+        private String altitude;
     }
 
-    public double getAltitudeDegrees() {
-        return altitudeDegrees;
+    @Data
+    public static class Azimuth {
+        private String azimuth;
     }
 
-    public void setAltitudeDegrees(double altitudeDegrees) {
-        this.altitudeDegrees = altitudeDegrees;
+    @Data
+    public static class Constellation {
+        @JsonProperty("short")
+        private String shortName;
+        private String name;
     }
 
-    public double getAzimuthDegrees() {
-        return azimuthDegrees;
+    @Data
+    public static class Equatorial {
+        @JsonProperty("rightAscensionString")
+        private String rightAscensionString;
+        private String declinationString;
     }
 
-    public void setAzimuthDegrees(double azimuthDegrees) {
-        this.azimuthDegrees = azimuthDegrees;
+    @Data
+    public static class ExtraInfo {
+        private String magnitude;
+        private String elongation;
+        private String distanceKm;
     }
 
-    public String getConstellationShort() {
-        return constellationShort;
-    }
-
-    public void setConstellationShort(String constellationShort) {
-        this.constellationShort = constellationShort;
-    }
-
-    public String getConstellationName() {
-        return constellationName;
-    }
-
-    public void setConstellationName(String constellationName) {
-        this.constellationName = constellationName;
-    }
-
-    public String getConstellationId() {
-        return constellationId;
-    }
-
-    public void setConstellationId(String constellationId) {
-        this.constellationId = constellationId;
-    }
-
-    public double getRightAscensionHours() {
-        return rightAscensionHours;
-    }
-
-    public void setRightAscensionHours(double rightAscensionHours) {
-        this.rightAscensionHours = rightAscensionHours;
-    }
-
-    public String getRightAscensionString() {
-        return rightAscensionString;
-    }
-
-    public void setRightAscensionString(String rightAscensionString) {
-        this.rightAscensionString = rightAscensionString;
-    }
-
-    public String getDeclinationString() {
-        return declinationString;
-    }
-
-    public void setDeclinationString(String declinationString) {
-        this.declinationString = declinationString;
-    }
-
-    public double getDeclinationDegrees() {
-        return declinationDegrees;
-    }
-
-    public void setDeclinationDegrees(double declinationDegrees) {
-        this.declinationDegrees = declinationDegrees;
-    }
-
-    public double getMagnitude() {
-        return magnitude;
-    }
-
-    public void setMagnitude(double magnitude) {
-        this.magnitude = magnitude;
-    }
-
-    public String getElongation() {
-        return elongation;
-    }
-
-    public void setElongation(String elongation) {
-        this.elongation = elongation;
+    @Data
+    public static class Entry {
+        private String name;
+        private String id;
     }
 }
