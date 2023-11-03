@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.astronomy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class CelestialData {
     @JsonProperty("data")
     private CelestialDataInfo data;
+    private String id;
 
     @Data
     public static class CelestialDataInfo {
@@ -40,12 +42,12 @@ public class CelestialData {
     @Data
     public static class Table {
         private List<Row> rows;
+        private Row entry;
     }
 
     @Data
     public static class Row {
         private List<Cell> cells;
-        private Entry entry;
     }
 
     @Data
@@ -55,7 +57,6 @@ public class CelestialData {
         private Position position;
         private String name;
         private ExtraInfo extraInfo;
-        private String id; // Use String for id
     }
 
     @Data
@@ -72,7 +73,7 @@ public class CelestialData {
 
     @Data
     public static class Position {
-        private Horizontal horizontalPosition;
+        private Horizontal horizontal;
         private Azimuth azimuth;
         private Constellation constellation;
         private Equatorial equatorial;
@@ -80,12 +81,20 @@ public class CelestialData {
 
     @Data
     public static class Horizontal {
-        private String altitude;
+        private Altitude altitude;
+    }
+
+    @Data
+    public static class Altitude {
+        @JsonProperty("string")
+        private String stringValue;
+        private String degrees;
     }
 
     @Data
     public static class Azimuth {
         private String azimuth;
+        private String degrees;
     }
 
     @Data
@@ -107,11 +116,5 @@ public class CelestialData {
         private String magnitude;
         private String elongation;
         private String distanceKm;
-    }
-
-    @Data
-    public static class Entry {
-        private String name;
-        private String id;
     }
 }
