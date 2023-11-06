@@ -1,4 +1,3 @@
-// yuri
 package com.nighthawk.spring_portfolio.mvc.astronomy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -17,6 +18,7 @@ public class History {
     private final String rapidApiKey = "47adfc21bcmsh44e5abcedbf2a29p150b62jsn37a5f5ecf19a";
     private final String rapidApiHost = "chatgpt-best-price.p.rapidapi.com";
     private final String jsonFilePath = "history.json"; // File path for the history JSON
+    private final List<ObjectNode> queryHistory = new CopyOnWriteArrayList<>(); // Thread-safe list to store history of queries and responses
 
     @PostMapping("/fetch")
     public ResponseEntity<String> fetchFromExternalApi(@RequestBody ChatInput input) {
@@ -40,7 +42,6 @@ public class History {
             responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
             writeHistoryToFile(input.getContent(), responseEntity.getBody());
         } catch (Exception e) {
-            // Better error handling: Log the stack trace to the server's log.
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
@@ -48,37 +49,74 @@ public class History {
         return responseEntity;
     }
 
-    // Method to write the query and response to a JSON file
     private void writeHistoryToFile(String query, String response) {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(jsonFilePath);
         
         try {
-            // Initialize the root array node
             ArrayNode arrayNode;
-            // If file doesn't exist, create it and initialize a new array node
             if (!file.exists()) {
                 file.createNewFile();
                 arrayNode = mapper.createArrayNode();
             } else {
-                // Otherwise, read the existing file into an array node
                 arrayNode = (ArrayNode) mapper.readTree(file);
                 if (arrayNode == null) {
                     arrayNode = mapper.createArrayNode();
                 }
             }
 
-            // Create the node that will be added to the array node
             ObjectNode historyNode = mapper.createObjectNode();
             historyNode.put("query", query);
-            historyNode.put("response", response);
-            arrayNode.add(historyNode);
 
-            // Write the updated array node back to the file
+            ObjectNode responseNode = mapper.readValue(response, ObjectNode.class);
+            if (responseNode.has("choices") && responseNode.get("choices").isArray()) {
+                ArrayNode choicesArray = (ArrayNode) responseNode.get("choices");
+                if (!choicesArray.isEmpty() && choicesArray.get(0).has("message") &&
+                    choicesArray.get(0).get("message").has("content")) {
+                    String content = choicesArray.get(0).get("message").get("content").asText();
+                    historyNode.put("response", content);
+                }
+            } else {
+                historyNode.put("response", "Response format not recognized.");
+            }
+            
+            arrayNode.add(historyNode);
             mapper.writeValue(file, arrayNode);
+            addToHistory(query, historyNode.get("response").asText());
         } catch (IOException e) {
-            // Better error handling: Log the stack trace to the server's log.
             e.printStackTrace();
+        }
+    }
+
+    private void addToHistory(String query, String content) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode historyNode = mapper.createObjectNode();
+        historyNode.put("query", query);
+        historyNode.put("response", content);
+        queryHistory.add(historyNode);
+    }
+
+    @GetMapping("/history")
+    public List<ObjectNode> getHistory() {
+        return queryHistory;
+    }
+
+    @DeleteMapping("/history")
+    public ResponseEntity<String> clearHistory() {
+        queryHistory.clear();
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File(jsonFilePath);
+
+        try {
+            if (file.exists()) {
+                ArrayNode emptyArray = mapper.createArrayNode();
+                mapper.writeValue(file, emptyArray);
+            }
+            return ResponseEntity.ok("History cleared successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Failed to clear history: " + e.getMessage());
         }
     }
 }
