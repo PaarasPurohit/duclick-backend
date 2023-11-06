@@ -15,6 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "https://teampremium.stu.nighthawkcodingsociety.com") // Allow CORS for this origin
 public class History {
 
     private final String rapidApiKey = "47adfc21bcmsh44e5abcedbf2a29p150b62jsn37a5f5ecf19a";
