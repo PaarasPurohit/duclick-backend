@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:4100")
 @RequestMapping("/api/celestial-data")
 public class CelestialDataController {
 
@@ -24,7 +25,7 @@ public class CelestialDataController {
         try {
             // Define the API endpoint and headers
             String apiUrl = "https://astronomy.p.rapidapi.com/api/v2/bodies/positions?latitude=33.775867&longitude=-84.39733&from_date=2017-12-20&to_date=2017-12-21&elevation=166&time=12%3A00%3A00";
-            String apiKey = "4081a90497msh5a787ecb0e167fbp16860cjsn75c92c6f8371";
+            String apiKey = "942fdd6377msh4fafe17c31e732ep15056bjsnf025c595bbdc";
             String apiHost = "astronomy.p.rapidapi.com";
 
             // Log the request information
