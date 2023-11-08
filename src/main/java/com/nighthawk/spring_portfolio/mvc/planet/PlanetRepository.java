@@ -9,7 +9,7 @@ public class PlanetRepository {
     public ResponseEntity<Planet> getPlanetById(@PathVariable String id) {
         String description = PlanetDescriptionStorage.getDescription(id);
         if (description != null) {
-            return ResponseEntity.ok(new Planet(id, description)); // Assuming you have a Planet constructor
+            return ResponseEntity.ok(new Planet(id, description)); 
         } else {
             return ResponseEntity.notFound().build();
         }
