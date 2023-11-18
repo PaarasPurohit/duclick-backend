@@ -12,10 +12,10 @@ public class PlayerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<ClickerEntity> unlockedClickers;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<UpgradeEntity> unlockedUpgrades;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -70,27 +70,8 @@ public class PlayerEntity {
         unlockClicker(clicker2);
     }
 
-    public void unlockClicker(ClickerEntity clicker) {
-        this.unlockedClickers.add(clicker);
-
-        if (this.currentClicker == null) {
-            this.currentClicker = clicker;
-        }
-    }
-
-    public void unlockUpgrade(UpgradeEntity upgrade) {
-        this.unlockedUpgrades.add(upgrade);
-    }
-
-    public void upgradeUpgrades() {
-        for (UpgradeEntity upgrade : unlockedUpgrades) {
-            upgrade.incLevel();
-        }
-    }
-
-    public void click() {
-        int clickValue = (currentClicker != null) ? currentClicker.getCp() : 1;
-        score += clickValue;
+    public Long getId() {
+        return id;
     }
 
     public List<ClickerEntity> getUnlockedClickers() {
@@ -115,5 +96,28 @@ public class PlayerEntity {
 
     public void addUpgrade(UpgradeEntity upgrade) {
         this.unlockedUpgrades.add(upgrade);
+    }
+
+    public void unlockClicker(ClickerEntity clicker) {
+        this.unlockedClickers.add(clicker);
+
+        if (this.currentClicker == null) {
+            this.currentClicker = clicker;
+        }
+    }
+
+    public void unlockUpgrade(UpgradeEntity upgrade) {
+        this.unlockedUpgrades.add(upgrade);
+    }
+
+    public void upgradeUpgrades() {
+        for (UpgradeEntity upgrade : unlockedUpgrades) {
+            upgrade.incLevel();
+        }
+    }
+
+    public void click() {
+        int clickValue = (currentClicker != null) ? currentClicker.getCp() : 1;
+        score += clickValue;
     }
 }

@@ -1,12 +1,24 @@
 package com.nighthawk.spring_portfolio.mvc.cookies;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
 public class UpgradeEntity extends ItemEntity {
+
+    @ManyToOne
+    private PlayerEntity player;
+
     private int click_per;
     private int level;
     private float angel_tokens;
+
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
 
     public int getClick_per() {
         return click_per;
