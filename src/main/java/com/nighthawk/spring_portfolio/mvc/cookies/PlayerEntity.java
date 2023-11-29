@@ -36,14 +36,14 @@ public class PlayerEntity {
     private void initPlayer() {
         // Example upgrades
         UpgradeEntity upgrade1 = new UpgradeEntity();
-        upgrade1.setName("Upgrade 1");
-        upgrade1.setDescription("Increase click power");
+        upgrade1.setName("Bishops and Knights");
+        upgrade1.setDescription("Gain pieces over time");
         upgrade1.setClick_per(2);
         upgrade1.setAngel_tokens(1.0f);
 
         UpgradeEntity upgrade2 = new UpgradeEntity();
-        upgrade2.setName("Upgrade 2");
-        upgrade2.setDescription("Double click power");
+        upgrade2.setName("The Pysch Room");
+        upgrade2.setDescription("Lots of great tables!");
         upgrade2.setClick_per(4);
         upgrade2.setAngel_tokens(2.0f);
 
