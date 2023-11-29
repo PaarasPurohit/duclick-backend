@@ -15,8 +15,11 @@ public abstract class Sorting {
      * Implement the sorting method in each child class
      */
 
-    public long doSort(){ // Returns time taken
-        
+    public long doSort(){ 
+        /*
+        * Returns time taken
+        */
+
         long start = System.nanoTime();
         Sort(this.toSort);
         long end = System.nanoTime();
