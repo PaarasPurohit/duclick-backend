@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.sortingmethods;
+package com.nighthawk.spring_portfolio.mvc.sort;
 
 import java.util.ArrayList;
 
@@ -27,4 +27,9 @@ public abstract class Sorting {
         
         return (end - start)/1000000;
     }
+
+    public static void main(String[] args) {
+     // Test for functionality   
+    }
 }
+
