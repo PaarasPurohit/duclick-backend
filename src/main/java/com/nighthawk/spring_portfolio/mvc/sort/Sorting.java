@@ -11,25 +11,24 @@ public abstract class Sorting {
     }
 
     abstract void Sort(ArrayList<Integer> toSort); 
-    /*
-     * Implement the sorting method in each child class
-     */
 
     public long doSort(){ 
-        /*
-        * Returns time taken
-        */
-
         long start = System.nanoTime();
-        Sort(this.toSort);
+        Sort(getToSort());
         long end = System.nanoTime();
-
-        
         return (end - start)/1000000;
     }
 
+    public ArrayList<Integer> getToSort() {
+        return toSort;
+    }
+
+    public void setToSort(ArrayList<Integer> toSort) {
+        this.toSort = toSort;
+    }
+
+    // main method for testing
     public static void main(String[] args) {
-     // Test for functionality   
+        // Test for functionality
     }
 }
-

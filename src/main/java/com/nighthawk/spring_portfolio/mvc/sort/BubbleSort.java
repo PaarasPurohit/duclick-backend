@@ -9,17 +9,16 @@ public abstract class BubbleSort extends Sorting {
     }
 
     public void sort() {
-        int n = toSort.size();
+        int n = getToSort().size();
         boolean swapped;
 
         do {
             swapped = false;
             for (int i = 1; i < n; i++) {
-                if (toSort.get(i - 1) > toSort.get(i)) {
-                    // Swap elements if they are in the wrong order
-                    int temp = toSort.get(i - 1);
-                    toSort.set(i - 1, toSort.get(i));
-                    toSort.set(i, temp);
+                if (getToSort().get(i - 1) > getToSort().get(i)) {
+                    int temp = getToSort().get(i - 1);
+                    getToSort().set(i - 1, getToSort().get(i));
+                    getToSort().set(i, temp);
                     swapped = true;
                 }
             }
