@@ -14,7 +14,7 @@ public abstract class Sorting {
 
     public long doSort(){ 
         long start = System.nanoTime();
-        Sort(getToSort());
+        Sort(this.toSort);
         long end = System.nanoTime();
         return (end - start)/1000000;
     }
