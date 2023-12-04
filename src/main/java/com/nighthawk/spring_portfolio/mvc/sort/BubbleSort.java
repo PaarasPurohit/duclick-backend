@@ -8,17 +8,22 @@ public abstract class BubbleSort extends Sorting {
         super(toSort);
     }
 
-    public void sort() {
-        int n = getToSort().size();
+    @Override
+    void Sort(ArrayList<Integer> toSort) {
+        bubbleSort(toSort, 0, toSort.size() - 1);
+    }
+
+    public void bubbleSort(ArrayList<Integer> toSort, int start, int end) {
+        int n = end - start + 1;
         boolean swapped;
 
         do {
             swapped = false;
-            for (int i = 1; i < n; i++) {
-                if (getToSort().get(i - 1) > getToSort().get(i)) {
-                    int temp = getToSort().get(i - 1);
-                    getToSort().set(i - 1, getToSort().get(i));
-                    getToSort().set(i, temp);
+            for (int i = start + 1; i <= end; i++) {
+                if (toSort.get(i - 1) > toSort.get(i)) {
+                    int temp = toSort.get(i - 1);
+                    toSort.set(i - 1, toSort.get(i));
+                    toSort.set(i, temp);
                     swapped = true;
                 }
             }
