@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.mvc.weather;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -13,13 +14,13 @@ import java.util.Random;
 @Service
 public class WeatherService {
 
-    private final List<String> weatherDataList = new ArrayList<>();
+    private final List<WeatherData> weatherDataList = new ArrayList<>();
     private final Random random = new Random();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void fetchAndStoreWeatherData(int numberOfRequests) {
         for (int i = 0; i < numberOfRequests; i++) {
             try {
-                // Generate random latitude and longitude within a relevant range
                 String latitude = generateLatitude();
                 String longitude = generateLongitude();
 
@@ -31,9 +32,8 @@ public class WeatherService {
                         .build();
 
                 HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-                String weatherData = extractRelevantData(response.body());
+                WeatherData weatherData = extractRelevantData(response.body());
 
-                // Store the relevant weather data in the ArrayList
                 weatherDataList.add(weatherData);
             } catch (Exception e) {
                 System.err.println("Error fetching weather data: " + e.getMessage());
@@ -46,18 +46,15 @@ public class WeatherService {
     }
 
     private String generateLatitude() {
-        // Replace with your logic to generate random latitude within a relevant range
         return String.format("%.4f", 34.0 + random.nextDouble() * (40.0 - 34.0));
     }
 
     private String generateLongitude() {
-        // Replace with your logic to generate random longitude within a relevant range
         return String.format("%.4f", -120.0 + random.nextDouble() * (150.0 + 120.0));
     }
 
-    private String extractRelevantData(String apiResponse) {
-        // You can parse the JSON response and extract the relevant information here
-        // For simplicity, let's just return the entire API response as a string
-        return apiResponse;
+    private WeatherData extractRelevantData(String apiResponse) throws Exception {
+        // Parse the JSON response and extract the relevant information
+        return objectMapper.readValue(apiResponse, WeatherData.class);
     }
 }
