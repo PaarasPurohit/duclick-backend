@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather Information</title>
+</head>
+<body>
+
+<h2>Weather Information</h2>
+
+<div th:each="weatherData : ${weatherDataList}">
+    <div>
+        <h3 th:text="${weatherData.location.name + ', ' + weatherData.location.country}"></h3>
+        <p th:text="${'Temperature: ' + weatherData.current.temp_c + '°C (' + weatherData.current.temp_f + '°F)'}"></p>
+        <p th:text="${'Condition: ' + weatherData.current.condition.text}"></p>
+        <p th:text="${'Wind: ' + weatherData.current.wind_kph + ' kph, ' + weatherData.current.wind_dir}"></p>
+        <p th:text="${'Pressure: ' + weatherData.current.pressure_mb + ' mb (' + weatherData.current.pressure_in + ' in)'}"></p>
+        <p th:text="${'Precipitation: ' + weatherData.current.precip_mm + ' mm (' + weatherData.current.precip_in + ' in)'}"></p>
+        <p th:text="${'Humidity: ' + weatherData.current.humidity + '%'}"></p>
+        <p th:text="${'Cloud: ' + weatherData.current.cloud + '%'}"></p>
+        <p th:text="${'Feels Like: ' + weatherData.current.feelslike_c + '°C (' + weatherData.current.feelslike_f + '°F)'}"></p>
+        <p th:text="${'Visibility: ' + weatherData.current.vis_km + ' km (' + weatherData.current.vis_miles + ' miles)'}"></p>
+        <p th:text="${'UV Index: ' + weatherData.current.uv}"></p>
+        <p th:text="${'Gust: ' + weatherData.current.gust_mph + ' mph (' + weatherData.current.gust_kph + ' kph)'}"></p>
+        <p th:text="${'Last Updated: ' + weatherData.current.last_updated}"></p>
+    </div>
+    <hr/>
+</div>
+
+</body>
+</html>
