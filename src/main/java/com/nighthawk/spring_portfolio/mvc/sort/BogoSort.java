@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
 
-public abstract class BogoSort extends Sorting{
+public class BogoSort extends Sorting{
 
     public BogoSort(ArrayList<Integer> toSort) {
         super(toSort);
@@ -29,9 +29,25 @@ public abstract class BogoSort extends Sorting{
             shuffleSort(toSort);
         }
     }
+    @Override
+    double worstCaseTime(){
+        return 0.0;
+    }
+    public static void main(String[] args){
+        System.out.println("~Bogosort: Time Complexity: O(n+1)!~");
+        ArrayList<Integer> i = new ArrayList<>();
+        i.add(1);
+        i.add(3);
+        i.add(2);
+        i.add(5);
+        i.add(78);
+        i.add(10);
 
-    
+        BogoSort b = new BogoSort(i);
 
+        long a = b.doSort();
+        System.out.println(a);
+    }
 
 
     

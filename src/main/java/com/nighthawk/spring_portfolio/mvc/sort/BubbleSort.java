@@ -2,7 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.sort;
 
 import java.util.ArrayList;
 
-public abstract class BubbleSort extends Sorting {
+public class BubbleSort extends Sorting {
 
     public BubbleSort(ArrayList<Integer> toSort) {
         super(toSort);
@@ -14,7 +14,7 @@ public abstract class BubbleSort extends Sorting {
     }
 
     public void bubbleSort(ArrayList<Integer> toSort, int start, int end) {
-        int n = end - start + 1;
+        //int n = end - start + 1;
         boolean swapped;
 
         do {
@@ -28,5 +28,25 @@ public abstract class BubbleSort extends Sorting {
                 }
             }
         } while (swapped);
+    }
+    @Override
+    double worstCaseTime(){
+        return 0.0;
+    }
+
+    public static void main(String[] args){
+        System.out.println("~Bubble-sort: Time Complexity: O(n^2)~");
+        ArrayList<Integer> i = new ArrayList<>();
+        i.add(1);
+        i.add(3);
+        i.add(2);
+        i.add(5);
+        i.add(78);
+        i.add(10);
+
+        BubbleSort b = new BubbleSort(i);
+
+        long a = b.doSort();
+        System.out.println(a);
     }
 }

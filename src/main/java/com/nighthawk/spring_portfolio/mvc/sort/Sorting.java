@@ -10,13 +10,15 @@ public abstract class Sorting {
         this.toSort = toSort; // Initializes sorting algorithm
     }
 
-    abstract void Sort(ArrayList<Integer> toSort); 
+    abstract void Sort(ArrayList<Integer> toSort);  // Sorting method to be implemented
+ 
+    abstract double worstCaseTime(); // Worst case (not time, but amount of parsings)
 
     public long doSort(){ 
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         Sort(this.toSort);
-        long end = System.nanoTime();
-        return (end - start)/1000000;
+        long end = System.currentTimeMillis();
+        return (end - start);
     }
 
     public ArrayList<Integer> getToSort() {
