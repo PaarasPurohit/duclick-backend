@@ -10,7 +10,12 @@ public class MergeSort extends Sorting {
 
     @Override
     void Sort(ArrayList<Integer> toSort) {
-        mergeSort(toSort, 0, toSort.size() - 1);
+        mergeSort(getToSort(), 0, toSort.size() - 1);
+    }
+
+    @Override
+    double worstCaseTime(){
+        return Math.log(8)/Math.log(2);
     }
 
     private void mergeSort(ArrayList<Integer> arr, int left, int right) {
@@ -60,5 +65,23 @@ public class MergeSort extends Sorting {
             j++;
             k++;
         }
+    }
+
+    public static void main(String[] args){
+        System.out.println("~Merge-sort: Time Complexity: O(n*log(n))~");
+        ArrayList<Integer> i = new ArrayList<>();
+        i.add(1);
+        i.add(3);
+        i.add(2);
+        i.add(5);
+        i.add(78);
+        i.add(10);
+
+        MergeSort b = new MergeSort(i);
+
+        long a = b.doSort();
+        System.out.println(a);
+
+        System.out.println(b.worstCaseTime());
     }
 }
