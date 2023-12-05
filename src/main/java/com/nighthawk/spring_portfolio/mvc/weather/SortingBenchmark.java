@@ -1,7 +1,5 @@
 package com.nighthawk.spring_portfolio.mvc.weather;
 
-import com.nighthawk.spring_portfolio.mvc.weather.SortingService;
-import com.nighthawk.spring_portfolio.mvc.weather.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +20,11 @@ public class SortingBenchmark {
     public void runBenchmark() {
         List<WeatherData> weatherData = weatherService.getWeatherDataList();
         sortingService.applySortingAlgorithms(weatherData);
-        // Perform time complexity analysis
-        // ...
+        displayBenchmarkSummary(weatherData);
+    }
+
+    private void displayBenchmarkSummary(List<WeatherData> weatherData) {
+        System.out.println("Sorting Benchmark Summary:");
+        System.out.println("Number of WeatherData elements: " + weatherData.size());
     }
 }
