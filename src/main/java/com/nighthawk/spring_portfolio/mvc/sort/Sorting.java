@@ -14,11 +14,11 @@ public abstract class Sorting {
  
     abstract double worstCaseTime(); // Worst case (not time, but amount of parsings)
 
-    public long doSort(){ 
-        long start = System.currentTimeMillis();
+    public double doSort(){ 
+        double start = System.currentTimeMillis();
         Sort(this.toSort);
-        long end = System.currentTimeMillis();
-        return (end - start);
+        double end = System.currentTimeMillis();
+        return (end - start)*1000;
     }
 
     public ArrayList<Integer> getToSort() {
@@ -29,8 +29,4 @@ public abstract class Sorting {
         this.toSort = toSort;
     }
 
-    // main method for testing
-    public static void main(String[] args) {
-        // Test for functionality
-    }
 }

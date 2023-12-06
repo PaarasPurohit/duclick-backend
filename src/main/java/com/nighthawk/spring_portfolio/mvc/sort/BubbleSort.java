@@ -31,7 +31,7 @@ public class BubbleSort extends Sorting {
     }
     @Override
     double worstCaseTime(){
-        return 0.0;
+        return (this.getToSort().size())^2;
     }
 
     public static void main(String[] args){
@@ -46,7 +46,7 @@ public class BubbleSort extends Sorting {
 
         BubbleSort b = new BubbleSort(i);
 
-        long a = b.doSort();
+        double a = b.doSort();
         System.out.println(a);
     }
 }

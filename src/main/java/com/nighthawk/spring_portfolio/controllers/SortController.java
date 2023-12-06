@@ -18,30 +18,30 @@ public class SortController {
 
     @GetMapping("/merge") // Merge sort get (need to check if arraylist allowed)
     // @RequestParam handles variables binding to frontend, defaults, etc
-    public long mergeSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double mergeSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
         MergeSort mergeSort = new MergeSort(toSort);    
-        long executionTime = mergeSort.doSort(); 
+        double executionTime = mergeSort.doSort(); 
         return executionTime;
 
     }
     @GetMapping("/insertion") // Insertion Sort @getmapping method
-    public long insertionSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double insertionSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
         InsertionSort insertionSort = new InsertionSort(toSort);    
-        long executionTime = insertionSort.doSort();       
+        double executionTime = insertionSort.doSort();       
         return executionTime;
     }
 
     @GetMapping("/bogo") // BogoSort @getmapping method
-    public long bogoSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double bogoSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
         BogoSort bogoSort = new BogoSort(toSort);    
-        long executionTime = bogoSort.doSort();       
+        double executionTime = bogoSort.doSort();       
         return executionTime;
     }
 
     @GetMapping("/bubble") // Bubblesort Get mapping method
-    public long bubbleSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double bubbleSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
         BubbleSort bubbleSort = new BubbleSort(toSort);    
-        long executionTime = bubbleSort.doSort();       
+        double executionTime = bubbleSort.doSort();       
         return executionTime;
     }
 
