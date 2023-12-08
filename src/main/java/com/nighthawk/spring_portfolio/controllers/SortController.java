@@ -25,21 +25,21 @@ public class SortController {
 
     }
     @GetMapping("/insertion") // Insertion Sort @getmapping method
-    public double insertionSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double insertionSort(@RequestBody ArrayList<Integer> toSort) {
         InsertionSort insertionSort = new InsertionSort(toSort);    
         double executionTime = insertionSort.doSort();       
         return executionTime;
     }
 
     @GetMapping("/bogo") // BogoSort @getmapping method
-    public double bogoSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double bogoSort(@RequestBody ArrayList<Integer> toSort) {
         BogoSort bogoSort = new BogoSort(toSort);    
         double executionTime = bogoSort.doSort();       
         return executionTime;
     }
 
     @GetMapping("/bubble") // Bubblesort Get mapping method
-    public double bubbleSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double bubbleSort(@RequestBody ArrayList<Integer> toSort) {
         BubbleSort bubbleSort = new BubbleSort(toSort);    
         double executionTime = bubbleSort.doSort();       
         return executionTime;
