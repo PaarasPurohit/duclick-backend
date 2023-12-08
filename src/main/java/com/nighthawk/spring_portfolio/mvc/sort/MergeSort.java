@@ -79,7 +79,7 @@ public class MergeSort extends Sorting {
 
         MergeSort b = new MergeSort(i);
 
-        long a = b.doSort();
+        double a = b.doSort();
         System.out.println(a);
 
         System.out.println(b.worstCaseTime());

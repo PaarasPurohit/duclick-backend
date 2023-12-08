@@ -25,7 +25,7 @@ public class InsertionSort extends Sorting{
 
     @Override
     double worstCaseTime(){
-        return 0.0;
+        return (this.getToSort().size())^2;
     }
     public static void main(String[] args){
         System.out.println("~Insertion-sort: Time Complexity: O(n^2)~");
@@ -39,7 +39,7 @@ public class InsertionSort extends Sorting{
 
         InsertionSort b = new InsertionSort(i);
 
-        long a = b.doSort();
+        double a = b.doSort();
         System.out.println(a);
     }
 }

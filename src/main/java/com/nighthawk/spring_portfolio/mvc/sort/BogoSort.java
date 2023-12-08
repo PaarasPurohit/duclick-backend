@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
 
+
 public class BogoSort extends Sorting{
 
     public BogoSort(ArrayList<Integer> toSort) {
@@ -19,6 +20,13 @@ public class BogoSort extends Sorting{
         return true;
     }
 
+    private double factorial(int n){
+        double tot = 1;
+        for(int i = 1; i < n; i++){
+            tot*=i;
+        }
+        return tot;
+    }
     private static void shuffleSort(ArrayList<Integer> list) {
         Collections.shuffle(list, new Random());
     }
@@ -31,7 +39,7 @@ public class BogoSort extends Sorting{
     }
     @Override
     double worstCaseTime(){
-        return 0.0;
+        return factorial(this.getToSort().size());
     }
     public static void main(String[] args){
         System.out.println("~Bogosort: Time Complexity: O(n+1)!~");
@@ -45,7 +53,7 @@ public class BogoSort extends Sorting{
 
         BogoSort b = new BogoSort(i);
 
-        long a = b.doSort();
+        double a = b.doSort();
         System.out.println(a);
     }
 
