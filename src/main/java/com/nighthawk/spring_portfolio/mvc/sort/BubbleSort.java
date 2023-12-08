@@ -10,11 +10,20 @@ public class BubbleSort extends Sorting {
 
     @Override
     void Sort(ArrayList<Integer> toSort) {
+        if (toSort == null || toSort.size() <= 1) {
+            // No need to sort an empty list or a list with only one element
+            return;
+        }
+
         bubbleSort(toSort, 0, toSort.size() - 1);
     }
 
     public void bubbleSort(ArrayList<Integer> toSort, int start, int end) {
-        //int n = end - start + 1;
+        if (toSort == null || start < 0 || end >= toSort.size() || start >= end) {
+            // Invalid input, cannot perform sorting
+            return;
+        }
+
         boolean swapped;
 
         do {
@@ -29,12 +38,14 @@ public class BubbleSort extends Sorting {
             }
         } while (swapped);
     }
+
     @Override
-    double worstCaseTime(){
-        return (this.getToSort().size())^2;
+    double worstCaseTime() {
+        // No specific worst-case time for BubbleSort
+        return 0.0;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("~Bubble-sort: Time Complexity: O(n^2)~");
         ArrayList<Integer> i = new ArrayList<>();
         i.add(1);

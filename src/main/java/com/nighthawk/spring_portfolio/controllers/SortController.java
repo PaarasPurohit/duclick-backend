@@ -22,7 +22,6 @@ public class SortController {
         MergeSort mergeSort = new MergeSort(toSort);    
         double executionTime = mergeSort.doSort(); 
         return executionTime;
-
     }
     @GetMapping("/insertion") // Insertion Sort @getmapping method
     public double insertionSort(@RequestBody ArrayList<Integer> toSort) {
@@ -46,5 +45,4 @@ public class SortController {
     }
 
     // TODO: Test Methods
-
 }
