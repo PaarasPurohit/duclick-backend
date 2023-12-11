@@ -19,7 +19,7 @@ import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 
 @RestController
-@CrossOrigin(origins = "https://paaraspurohit.github.io")
+@CrossOrigin(origins = "http://127.0.0.1:4000/")
 public class JwtApiController {
 
 	@Autowired
