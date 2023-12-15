@@ -19,7 +19,7 @@ public class SortController {
 
     @PostMapping("/merge/") // Merge sort get (need to check if arraylist allowed)
     // @RequestParam handles variables binding to frontend, defaults, etc
-    public double mergeSort(@RequestParam(name="toSort") ArrayList<Integer> toSort) {
+    public double mergeSort(@RequestBody ArrayList<Integer> toSort) {
         MergeSort mergeSort = new MergeSort(toSort);    
         double executionTime = mergeSort.doSort(); 
         return executionTime;
